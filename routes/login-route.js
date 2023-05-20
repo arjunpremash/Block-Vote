@@ -11,7 +11,7 @@ router.get('/login', function(req, res, next) {
 });
 
 var nodemailer = require('nodemailer');
-var rand=Math.floor((Math.random() * 10000) + 69);
+var rand=Math.floor((Math.random() * 9000) + 1000);
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

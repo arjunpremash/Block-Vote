@@ -113,7 +113,7 @@ App = {
           var fetchedQualification = contestant[5]
 
           var contestantTemplate = "<div class='card' style='width: 15rem; margin: 1rem;'><img class='card-img-top'src='../img/Sample_User_Icon.png' alt=''><div class='card-body text-center'><h4 class='card-title'>"
-            + name + "</h4>" +
+            + name + "</h4>" + "<h4 class='card-title'>" + fetchedParty + "</h4>" +
             "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#modal" + id + "'>Click Here to Vote</button>"
             + "<div class='modal fade' id='modal" + id + "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>"
             + "<div class='modal-dialog modal-dialog-centered' role='document'>"

@@ -49,6 +49,15 @@ contract Contest{
     }
 
 	function addContestant(string memory _name , string memory _party , uint _age , string memory _qualification) public onlyAdmin validState(PHASE.reg){
+		// Check if the contestant already exists
+		for (uint i = 1; i <= contestantsCount; i++) {
+    		Contestant storage existingContestant = contestants[i];
+    		if (keccak256(bytes(existingContestant.name)) == keccak256(bytes(_name)) && keccak256(bytes(existingContestant.party)) == keccak256(bytes(_party))) {
+    			revert("Contestant already exists");
+			}
+		}
+
+		
 		contestantsCount++;
 		contestants[contestantsCount]=Contestant(contestantsCount,_name,0,_party,_age,_qualification);
 	}

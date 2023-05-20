@@ -1,6 +1,6 @@
 --> Cannot change state after election is over
 
---> Same Candidate can register multiple times
+--> Same Candidate can register multiple times : Fixed by checking for both same name and party
 
 --> Same OTP for same user
 
