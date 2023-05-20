@@ -1,0 +1,7 @@
+--> Cannot change state after election is over
+
+--> Same Candidate can register multiple times
+
+--> Same OTP for same user
+
+-->App exits after invalid aadhar in database
