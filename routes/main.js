@@ -48,6 +48,12 @@ router.post('/registerdata',function(req,res){
           return console.error(error.message);
         }
         //console.log(results)
+
+        if (results.length === 0) {
+          // Handle the case when no records are found for the given query
+          res.render('voter-registration.ejs',{alertMsg:"No record found for the given Aadhar number"});
+          //res.send('No record found for the given Aadhar number');
+      } else {
         dob = results[0].Dob;
         var email=results[0].Email;
         age = getAge(dob);
@@ -74,14 +80,15 @@ router.post('/registerdata',function(req,res){
           }
           else
           {
-            res.send('You cannot vote as your age is less than 18');
+            res.render('voter-registration.ejs',{alertMsg:"You cannot vote as your age is less than 18"});
+            //res.send('You cannot vote as your age is less than 18');
           }
         }
         else    //IF USER ALREADY REGISTERED
         {
           res.render('voter-registration.ejs',{alertMsg:"You are already registered. You cannot register again"});
         }
-        
+      }
     });
 
     //console.log(dob);

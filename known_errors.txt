@@ -2,6 +2,6 @@
 
 --> Same Candidate can register multiple times : Fixed by checking for both same name and party
 
---> Same OTP for same user
+--> Same OTP for same user : OTP will always be 4 digit
 
--->App exits after invalid aadhar in database
+-->App exits after invalid aadhar in database : Fixed with proper alert message
