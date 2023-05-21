@@ -74,27 +74,7 @@ App = {
       contestInstance = instance;
       return contestInstance.contestantsCount();
     }).then(function (contestantsCount) {
-      // var contestantsResults=$("#contestantsResults");
-      // contestantsResults.empty();
-
-      // var contestantSelect=$("#contestantSelect");
-      // contestantSelect.empty();
-
-      // for(var i=1; i<=contestantsCount; i++){
-      //   contestInstance.contestants(i).then(function(contestant){
-      //     var id=contestant[0];
-      //     var name=contestant[1];
-      //     var voteCount=contestant[2];
-      //     var fetchedParty=contestant[3];
-      //     var fetchedAge = contestant[4];
-      //     var fetchedQualification = contestant[5]
-
-      //     var contestantTemplate="<tr><th>"+id+"</th><td>"+name+"</td><td>"+fetchedAge+"</td><td>"+fetchedParty+"</td><td>"+fetchedQualification+"</td><td>"+voteCount+"</td></tr>";
-      //     contestantsResults.append(contestantTemplate)  ;
-
-      //     var contestantOption="<option value='"+id+"'>"+name+"</option>";
-      //     contestantSelect.append(contestantOption);
-
+      
       var contestantsResults = $("#test");
       contestantsResults.empty();
       var contestantsResultsAdmin = $("#contestantsResultsAdmin");
@@ -103,6 +83,7 @@ App = {
       var contestantSelect = $("#contestantSelect");
       contestantSelect.empty();
 
+      
       for (var i = 1; i <= contestantsCount; i++) {
         contestInstance.contestants(i).then(function (contestant) {
           var id = contestant[0];
@@ -112,6 +93,7 @@ App = {
           var fetchedAge = contestant[4];
           var fetchedQualification = contestant[5]
 
+          if (phaseEnum == 1) {
           var contestantTemplate = "<div class='card' style='width: 15rem; margin: 1rem;'><img class='card-img-top'src='../img/Sample_User_Icon.png' alt=''><div class='card-body text-center'><h4 class='card-title'>"
             + name + "</h4>" + "<h4 class='card-title'>" + fetchedParty + "</h4>" +
             "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#modal" + id + "'>Click Here to Vote</button>"
@@ -128,8 +110,8 @@ App = {
             + "<button type='button' class='btn btn-info' data-dismiss='modal'>Close</button></div>"
             + "</div></div></div>"
             + "</div></div>";
-          contestantsResults.append(contestantTemplate);
-
+              contestantsResults.append(contestantTemplate);
+          }
           var contestantOption = "<option style='padding: auto;' value='" + id + "'>" + name + "</option>";
           contestantSelect.append(contestantOption);
 
@@ -181,6 +163,9 @@ App = {
       if (state == 2) {
         $("#not").hide();
         contestInstance.contestantsCount().then(function (contestantsCount) {
+          var winnerId;
+          var highestVoteCount = 0;
+          
           for (var i = 1; i <= contestantsCount; i++) {
             contestInstance.contestants(i).then(function (contestant) {
               var id = contestant[0];
@@ -189,12 +174,26 @@ App = {
               var fetchedParty = contestant[3];
               var fetchedAge = contestant[4];
               var fetchedQualification = contestant[5];
-
+              
               var resultTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + fetchedAge + "</td><td>" + fetchedParty + "</td><td>" + fetchedQualification + "</td><td>" + voteCount + "</td></tr>";
               result.append(resultTemplate);
+              
+              // Check if this contestant has the highest vote count
+              if (voteCount > highestVoteCount) {
+                highestVoteCount = voteCount;
+                winnerId = id;
+              }
+              
+              // Display the winner based on the highest vote count
+              var winnerContainer = $("#winnerContainer");
+              if (id == winnerId) {
+                var winnerTemplate = "<h2>Winner: " + name + "</h2>";
+                winnerContainer.html(winnerTemplate);
+              }
             });
           }
-        })
+        });
+        
 
       } else {
         $("#renderTable").hide();

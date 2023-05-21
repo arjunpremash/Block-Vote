@@ -1,5 +1,5 @@
---> OTP Timeout
+--> OTP Timeout : Done
 
 -->Better After Vote
 
--->Better Warning of "You cannot vote as your age is less than 18"
+-->Better Warning of "You cannot vote as your age is less than 18" : Done

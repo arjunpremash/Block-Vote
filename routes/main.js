@@ -19,7 +19,7 @@ var getAge = require('get-age');
 
 
 var nodemailer = require('nodemailer');
-var rand=Math.floor((Math.random() * 10000) + 69);
+var rand=Math.floor((Math.random() * 9000) + 1000);
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -130,7 +130,7 @@ router.post('/otpverify', (req, res) => {
     }
     else 
     {
-       res.render('voter-registration.ejs',{alertMsg:"Session Expired! , You have entered wronge OTP "});
+       res.render('voter-registration.ejs',{alertMsg:"Session Expired! , You have entered wrong OTP "});
     }
 })
 
