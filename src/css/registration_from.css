@@ -102,6 +102,14 @@ form.sign-in-form {
   font-weight: 500;
 }
 
+.password-toggle {
+  position: relative;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 .social-text {
   padding: 0.7rem 0;
   font-size: 1rem;
@@ -397,4 +405,6 @@ form.sign-in-form {
     bottom: 28%;
     left: 50%;
   }
+
+  
 }

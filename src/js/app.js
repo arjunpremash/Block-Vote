@@ -213,6 +213,7 @@ App = {
     App.contracts.Contest.deployed().then(function (instance) {
       return instance.vote(contestantId, { from: App.account });
     }).then(function (result) {
+      location.reload();
       // $("#test").hide();
       // $("#after").show();
     }).catch(function (err) {
@@ -254,6 +255,7 @@ App = {
     }).then(function (result) {
       $("#content").hide();
       $("#loader").show();
+      location.reload();
     }).catch(function (err) {
       console.error(err);
     })
