@@ -198,36 +198,69 @@ App = {
 
   // ------------- voting code -------------
   castVote: function (id) {
-
+    $("#event").hide();
     var contestantId = id;
+  
     App.contracts.Contest.deployed().then(function (instance) {
       return instance.vote(contestantId, { from: App.account });
     }).then(function (result) {
       location.reload();
-      // $("#test").hide();
-      // $("#after").show();
     }).catch(function (err) {
       console.error(err);
-    })
-
-    
+    });
+  
+    // Listen for the DuplicateVote event
+    App.contracts.Contest.deployed().then(function (instance) {
+      var event = instance.DuplicateVote();
+      event.watch(function (error, eventData) {
+        if (error) {
+          console.error("Error in DuplicateVote event:", error);
+        } else {
+          console.log("DuplicateVote event emitted");
+          console.log("Event data:", eventData);
+          $("#event").show();
+        }
+      });
+    });
   },
 
   
 
   // ------------- adding candidate code -------------
   addCandidate: function () {
+    $("#event").hide();
     $("#loader").hide();
     var name = $('#name').val();
     var age = $('#age').val();
     var party = $('#party').val();
     var qualification = $('#qualification').val();
+    // Declare a flag to check if the event has been emitted
+    var eventEmitted = false;
 
     App.contracts.Contest.deployed().then(function (instance) {
-      console.log("Adding cadidates to contract : ", instance)
+      console.log("Adding candidates to contract: ", instance);
+  
+      // Get the contract event
+      var event = instance.ContestantAdditionFailed();
+  
+      // Watch for the event
+      event.watch(function (error, eventData) {
+        if (error) {
+          console.error(error);
+        } else {
+          console.log("ContestantAdditionFailed event emitted");
+          console.log("Event data:", eventData);
+          $("#event").show();
+          eventEmitted = true;
+        }
+      });
+  
       return instance.addContestant(name, party, age, qualification);
     }).then(function (result) {
-      $("#loader").show();
+      // Check if the event has been emitted
+      if (!eventEmitted) {
+        $("#loader").show();
+      }
       $('#name').val('');
       $('#age').val('');
       $('#party').val('');
@@ -235,7 +268,7 @@ App = {
     }).catch(function (err) {
       console.log("Error adding candidate");
       console.error(err);
-    })
+    });
   },
 
   // ------------- changing phase code -------------

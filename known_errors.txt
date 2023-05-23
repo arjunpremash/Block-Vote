@@ -5,3 +5,5 @@
 --> Same OTP for same user : OTP will always be 4 digit
 
 -->App exits after invalid aadhar in database : Fixed with proper alert message
+
+-->Alert with id="event" show/hide error-CandidateAddition

@@ -5248,6 +5248,20 @@ tbody.collapse.show {
   color: #18381a;
 }
 
+.alert-failure {
+  color: #e21818;
+  background-color: #ff0000;
+  border-color: #cde9ce;
+}
+
+.alert-failure hr {
+  border-top-color: #bbe1bd;
+}
+
+.alert-failure .alert-link {
+  color: #551713;
+}
+
 .alert-info {
   color: #00626e;
   background-color: #ccf2f6;
