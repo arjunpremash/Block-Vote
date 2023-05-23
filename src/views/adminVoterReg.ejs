@@ -92,9 +92,8 @@
                                 <tr>
                                     <th>S.N</th>
                                     <th>Account address</th>
+                                    <th>Aadhar No</th>
                                     <th>Is registered</th>
-                
-                
                                 </tr>
                 
                                 <% if(userData.length!=0){ var i=0; userData.forEach(function(data){ console.log(data) %>
@@ -106,9 +105,12 @@
                                             <%=data.Account_address%>
                                         </td>
                                         <td>
+                                            <%=data.Aadharno%>
+                                        </td>
+                                        <td>
                                             <%=data.Is_registered%>
                                         </td>
-                
+                                        
                 
                                     </tr>
                                     <% i++; }) %>

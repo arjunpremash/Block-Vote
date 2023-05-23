@@ -30,7 +30,7 @@ var transporter = nodemailer.createTransport({
 
 var account_address;
 var data;
-
+var aadharno;
 // app.use(express.static('public'));
 // //app.use('/css',express.static(__dirname+'public/css'));
 // //app.use(express.json());
@@ -54,6 +54,7 @@ router.post('/registerdata',function(req,res){
           res.render('voter-registration.ejs',{alertMsg:"No record found for the given Aadhar number"});
           //res.send('No record found for the given Aadhar number');
       } else {
+        aadharno = results[0].Aadharno;
         dob = results[0].Dob;
         var email=results[0].Email;
         age = getAge(dob);
@@ -101,7 +102,7 @@ router.post('/otpverify', (req, res) => {
     var otp = req.body.otp;
     if (otp==rand) 
     {
-        var record= { Account_address: account_address, Is_registered : 'Yes' };
+        var record= { Account_address: account_address, Is_registered : 'Yes', Aadharno: aadharno };
         var sql="INSERT INTO registered_users SET ?";
         conn.query(sql,record, function(err2,res2)
           {

@@ -5,21 +5,11 @@ App = {
   account: 0x0,
 
   init: async function () {
-    // Load pets.
-
     return await App.initWeb3();
   },
 
   initWeb3: async function () {
-    // if (window.ethereum) {
-    //   try {
-    //     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    //     setAccounts(accounts);
-    //   } catch (error) {
-    //     if (error.code === 4001) {
-    //       // User rejected request
-    //     }
-    //   }
+    
     if (window.ethereum) {
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -220,7 +210,10 @@ App = {
       console.error(err);
     })
 
+    
   },
+
+  
 
   // ------------- adding candidate code -------------
   addCandidate: function () {
