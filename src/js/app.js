@@ -198,19 +198,12 @@ App = {
 
   // ------------- voting code -------------
   castVote: function (id) {
-    $("#event").hide();
+    $("#vevent").hide();
     var contestantId = id;
-  
+    var eventEmitted=false;
+
     App.contracts.Contest.deployed().then(function (instance) {
-      return instance.vote(contestantId, { from: App.account });
-    }).then(function (result) {
-      location.reload();
-    }).catch(function (err) {
-      console.error(err);
-    });
-  
-    // Listen for the DuplicateVote event
-    App.contracts.Contest.deployed().then(function (instance) {
+      // Listen for the DuplicateVote event
       var event = instance.DuplicateVote();
       event.watch(function (error, eventData) {
         if (error) {
@@ -218,9 +211,22 @@ App = {
         } else {
           console.log("DuplicateVote event emitted");
           console.log("Event data:", eventData);
-          $("#event").show();
+          eventEmitted=true;
+          $("#vevent").show();
         }
       });
+
+      return instance.vote(contestantId, { from: App.account });
+    }).then(function (result) {
+      if(eventEmitted)
+        window.alert("You can only vote once!");
+      else{
+        window.alert("Vote has been casted!");
+        location.reload();
+      }
+      //location.reload();
+    }).catch(function (err) {
+      console.error(err);
     });
   },
 
@@ -250,7 +256,6 @@ App = {
         } else {
           console.log("ContestantAdditionFailed event emitted");
           console.log("Event data:", eventData);
-          $("#event").show();
           eventEmitted = true;
         }
       });
@@ -260,6 +265,10 @@ App = {
       // Check if the event has been emitted
       if (!eventEmitted) {
         $("#loader").show();
+      }
+      else{
+        //window.alert("Duplicate Contestant");
+        $("#event").show();
       }
       $('#name').val('');
       $('#age').val('');

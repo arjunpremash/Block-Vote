@@ -124,17 +124,13 @@
                       </div>
                     </form>
                   </div>
-                  <div id="event-container"></div>
-                  <!--
-                  <div class="alert alert-failure" id="event">
+                  <!---->
+                  <div class="alert alert-failure" id="event" style="background-color: #f73636; color: aliceblue;">
                     <span>
                       <b>Duplicate Candidate </b> has been Found....!</span>
                   </div>
-                  -->
+                  
                   <div class="alert alert-success" id="loader">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <!-- <i class="material-icons">close</i> -->
-                    </button>
                     <span>
                       <b> Candidate </b> has been added Successfully....!</span>
                   </div>
@@ -184,6 +180,7 @@
 <script>
   $(document).ready(function() {
     $().ready(function() {
+      $("#event").hide();
       $sidebar = $('.sidebar');
 
       $sidebar_img_container = $sidebar.find('.sidebar-background');
