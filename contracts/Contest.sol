@@ -71,6 +71,11 @@ contract Contest{
 		voters[user].isRegistered=true;
 	}
 
+	//Voter Registration
+	function registration() public validState(PHASE.reg){
+		voters[msg.sender].isRegistered=true;
+	}
+
 	event DuplicateVote(address indexed voter);
 
 	function vote(uint _contestantId) public validState(PHASE.voting){

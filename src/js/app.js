@@ -1,3 +1,4 @@
+//sadiya
 var phaseEnum; // for changing phases of voting
 App = {
   web3Provider: null,
